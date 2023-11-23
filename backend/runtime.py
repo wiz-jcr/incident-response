@@ -3,16 +3,18 @@ import json
 import os
 from dotenv import load_dotenv
 load_dotenv()
-from llama_index import StorageContext, load_index_from_storage
+from llama_index import SimpleDirectoryReader, GPTVectorStoreIndex
 from chat_helper import ChatHelper
 from openai_token import OPENAI_TOKEN
 
 os.environ["OPENAI_API_KEY"] = OPENAI_TOKEN
 
 # rebuild storage context
-storage_context = StorageContext.from_defaults(persist_dir='./index')
+storage_context = StorageContext.from_defaults(persist_dir='./data')
+loader = SimpleDirectoryReader('./index', required_exts='*.txt')
+documents = loader.load_data()
 # load index
-index = load_index_from_storage(storage_context)
+index = GPTVectorStoreIndex.from_documents(documents)
 
 # Create the chatbot
 
@@ -22,7 +24,6 @@ if __name__ == "__main__":
 
     # User ID
     user_id = st.text_input("Your Name:")
-    
     # Check if user ID is provided
     if user_id:
         # Create chatbot instance for the user
@@ -40,13 +41,10 @@ if __name__ == "__main__":
 
         # Generate response
         if user_input:
-            if user_input.lower() in ["bye", "goodbye"]:
-                bot_response = "Goodbye!"
-            else:
-                bot_response = bot.generate_response(user_input)
-                bot_response_content = bot_response['content']
-                st.write(f"{user_id}: {user_input}")
-                st.write(f"Bot: {bot_response_content}")
-                bot.save_chat_history()
-                bot.chat_history.append({"role": "user", "content": user_input})
-                bot.chat_history.append({"role": "assistant", "content": bot_response_content})
+            bot_response = bot.generate_response(user_input)
+            bot_response_content = bot_response['content']
+            st.write(f"{user_id}: {user_input}")
+            st.write(f"Bot: {bot_response_content}")
+            bot.save_chat_history()
+            bot.chat_history.append({"role": "user", "content": user_input})
+            bot.chat_history.append({"role": "assistant", "content": bot_response_content})
