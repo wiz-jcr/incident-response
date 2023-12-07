@@ -1,0 +1,143 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #F3F5F7;
+    ;
+    margin: 0;
+    padding: 0;
+}
+h1 {
+    font-size: 30px;
+    font: Source Sans Pro;
+    text-align: center;
+}
+
+.sidebar{
+    width: 25%;
+    height: 100%;
+    margin-left: 5%;
+    position: absolute;
+    background-color: #FFFFFF;
+}
+
+a.menu-item{
+    width: 100%;
+    text-align: left;
+}
+
+a.menu-item{
+    margin-top: 10px;
+    height: 55px;
+    background-color: #FFFFFF;
+    color: #000000;
+}
+
+a.menu-item:hover {     
+    background-color:#7C5CFC;
+    color: #FFFFFF;
+}
+
+a.menu-item:focus {     
+    background-color:#7C5CFC;
+    color: #FFFFFF;
+}
+
+a.btn-floating{
+    background-color:#7C5CFC;
+    bottom: 25%;
+    left: 45%;
+    position: absolute;
+}
+
+.main{
+    width: 60%;
+    height: 100%;
+    margin-left: 30%;
+    position: absolute;
+    background-color: #FFFFFF;
+}
+
+.main#dash{
+    display: block;
+}
+
+.main#chat{
+    display: none;
+}
+
+.main#threats{
+    display: none;
+}
+
+/* CHAT FUNCTION */
+#chat-container {
+    width: 100%;
+    border: 1px solid #ccc;
+    overflow-y: auto;
+    height: 60%;
+}
+
+#chat-messages {
+    bottom: 0%;
+    flex-direction: column-reverse;
+    display: flex;
+    padding: 10px;
+}
+
+#input-container {
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #fff;
+    border-top: 1px solid #ccc;
+    width: 100%;
+    bottom: 15%;
+}
+
+#user-input {
+    width: 70%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#send-button {
+    width: 25%;
+    padding: 8px;
+    background-color: #7C5CFC;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.message {
+    align-self: flex-start;
+    margin-bottom: 10px;
+    padding: 8px;
+    border-radius: 5px;
+    background-color: #00E096;
+    color: #fff;
+    width: auto;
+    max-width: 70%;
+}
+
+.user-message {
+    margin-right: 0;
+    text-align: right;
+    align-self: flex-end;
+    background-color: #7C5CFC;
+    width: auto;
+}
+
+span.badge {
+    background-color: #7C5CFC;
+    color: #fff;
+}
+
+li div.collapsible-body div.left-body{
+    width: 50%;
+}
+li div.collapsible-body div.right-body{
+    width: 50%;
+}

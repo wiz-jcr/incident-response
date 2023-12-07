@@ -1,0 +1,22 @@
+[
+    {
+      "model":"frontend.Menu",
+      "pk":1,
+      "fields":{"name": "Dashboard", "tag_id": "dash", "icon":"home"}
+    },
+    {
+      "model":"frontend.Menu",
+      "pk":2,
+      "fields":{"name": "Threats & Incidents", "tag_id": "threats", "icon": "playlist_add_check"}
+    },
+    {
+      "model":"frontend.Setting",
+      "pk":3,
+      "fields":{"name": "Settings", "tag_id": "setting", "icon": "settings"}
+    },
+    {
+      "model":"frontend.Setting",
+      "pk":4,
+      "fields":{"name": "Help&Support", "tag_id": "help", "icon": "info_outline"}
+    }
+  ]

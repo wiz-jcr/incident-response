@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Django App</title>
+    {% load static %}
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="{% static 'frontend/materialize.min.css' %}"  media="screen,projection"/>
+    <link rel="stylesheet" href="{% static 'frontend/style.css' %}">
+    <script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/plotly.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/chart.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/misc.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/msg.js' %}"></script>
+</head>
+<body>
+    
+    <div class="sidebar">
+    <h1>IncidentShield</h1>
+        <div class="collection">
+            <a class="btn-flat disabled">Main Menu</a>
+            {% for item in menulist %}
+            <a href="#!" class="btn menu-item" onclick="showContent('{{ item.tag_id }}')"><i class="material-icons left">{{ item.icon }}</i>{{ item.name }}</a>
+            {% endfor %}
+            <a class="btn-flat disabled">Preferences</a>
+            {% for item in settinglist %}
+            <a href="#!" class="btn menu-item" onclick="showContent('{{ item.tag_id }}')"><i class="material-icons left">{{ item.icon }}</i>{{ item.name }}</a>
+            {% endfor %}
+        </div>
+        <a class="btn-floating btn-large" onclick="showContent('chat')"><i class="material-icons">chat_bubble_outline</i></a>
+    </div>
+    <div class="main" id="dash">
+        <h1>
+            Dashboard
+        </h1>
+        <div id="chart" style="width: 90%;height: 50%;margin-left:5%;"></div>
+    </div>
+    <div class="main" id="chat">
+        <h1>
+            Chat
+        </h1>
+        <div id="chat-container">
+            <div id="chat-messages"></div>
+            <div id="input-container">
+                <input type="text" id="user-input" placeholder="Type your message...">
+                <button id="send-button" onclick="sendMessage()">Send</button>
+            </div>
+        </div>
+    </div>
+    <div class="main" id="threats">
+        <h1>
+            Incidents
+        </h1>
+        <ul class="collapsible">
+            {% for item in incidentlist %}
+            <li>
+                <div class="collapsible-header" id="incident-{{ item.id }}">
+                    <i class="material-icons">error_outline</i>
+                    {{ item.type }}
+                    <span class="badge">{{ item.time_stamp }}</span>
+                </div>
+                <div class="collapsible-body">
+                    <div style="display:flex">
+                        <div class="left-body">
+                            <ul class="collapsible">
+                                {% for tag in item.finished %}
+                                <li class="collapsible-header green" style="color:white"><i class="material-icons">done</i>{{ tag }}</li>
+                                {% endfor %}
+                                <li class="collapsible-header"><i class="material-icons">error_outline</i>{{ item.stage_name }}</li>
+                            </ul>
+                        </div>
+                        <div class="right-body card horizontal">
+                            <div class="card-content">
+                            <p>Lorem ipsum</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="main" id="setting">
+        <h1>
+            Work In Progress
+        </h1>
+    </div>
+    <div class="main" id="help">
+        <h1>
+            Work In Progress
+        </h1>
+    </div>
+    <script>
+        showContent('dash');
+
+        if(document.getElementById('dash').style.display == 'block'){
+            // Call the function initially
+            drawChart();
+            // Set up an interval to call the function every 5 seconds
+            setInterval(drawChart, 1000);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.collapsible');
+            var instances = M.Collapsible.init(elems, {accordion: false});
+         });
+
+    </script>
+</body>
+</html>
