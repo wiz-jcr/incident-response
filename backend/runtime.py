@@ -10,8 +10,8 @@ from openai_token import OPENAI_TOKEN
 os.environ["OPENAI_API_KEY"] = OPENAI_TOKEN
 
 # rebuild storage context
-storage_context = StorageContext.from_defaults(persist_dir='./data')
-loader = SimpleDirectoryReader('./index', required_exts='*.txt')
+# storage_context = StorageContext.from_defaults(persist_dir='./data')
+loader = SimpleDirectoryReader('./data', required_exts='*.txt')
 documents = loader.load_data()
 # load index
 index = GPTVectorStoreIndex.from_documents(documents)
