@@ -1,16 +1,21 @@
-import openai
+from openai import OpenAI
+
+client = OpenAI(api_key=OPENAI_TOKEN)
 import json
+from pathlib import Path
+
+system_prompt = Path('./system_prompt.txt').read_text()
+system_prompt = system_prompt.replace('\n', '')
 
 class ChatHelper:
     def __init__(self, api_key, index, user_id):
         self.index = index
-        openai.api_key = api_key
         self.user_id = user_id
         self.chat_history = []
         self.filename = f"{self.user_id}_chat_history.json"
 
     def generate_response(self, user_input):
-        prompt = [{"role": "system", "content": "You are an incdent response specialist of the SANS framework helping people to analyse their incidents"}]
+        prompt = [{"role": "system", "content": "{}".format(system_prompt)}]
         if self.chat_history:
             for message in self.chat_history[-5:]:
                 prompt.append(message)
@@ -19,12 +24,12 @@ class ChatHelper:
         # query_engine = self.index.as_query_engine()
         
         # response = query_engine.query(user_input)
-        completion = openai.ChatCompletion.create(
-                    model="gpt-3.5-turbo",
-                    messages=prompt
-                    )
-        response = completion.choices[0].message
-        message = {"role": "assistant", "content": response["content"]}
+        completion = client.chat.completions.create(model="gpt-3.5-turbo",
+        messages=prompt,
+        # name = "IncidentArmor",
+        temperature = 0.2)
+        content = completion.choices[0].message.content
+        message = {"role": "assistant", "content": content}
         self.chat_history.append({"role": "user", "content": user_input})
         self.chat_history.append(message)
         return message
