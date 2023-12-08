@@ -1,5 +1,0 @@
-A denial-of-service (DoS) attack is a malicious attempt to disrupt the normal functioning of a computer network, service, or website by overwhelming it with a flood of illegitimate requests or traffic. These attacks aim to render the target inaccessible to users, causing a denial of service. DoS attacks can take various forms, including flooding the network with traffic, exploiting vulnerabilities in software, or exhausting system resources.
-
-Distributed denial-of-service (DDoS) attacks involve multiple compromised computers, forming a botnet that collectively launches the attack. Attackers may use amplification techniques to magnify the impact. Prevention and mitigation strategies include firewalls, intrusion detection systems, and traffic filtering.
-
-The motivation behind DoS attacks varies, ranging from hacktivism to extortion or simple disruption. Perpetrators often remain anonymous, complicating legal action. Governments, businesses, and individuals deploy countermeasures to protect against these attacks, but evolving tactics require ongoing security measures to safeguard digital infrastructure and services.
