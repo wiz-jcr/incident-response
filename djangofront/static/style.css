@@ -101,7 +101,7 @@ a.btn-floating{
     border-radius: 5px;
 }
 
-#send-button {
+#input-container button.send-button {
     width: 25%;
     padding: 8px;
     background-color: #7C5CFC;
@@ -135,9 +135,9 @@ span.badge {
     color: #fff;
 }
 
-.left-body{
+li div.collapsible-body div.left-body{
     width: 50%;
 }
-.right-body{
+li div.collapsible-body div.right-body{
     width: 50%;
 }

@@ -4,3 +4,4 @@ from .models import *
 admin.site.register( Menu )
 admin.site.register( Setting )
 admin.site.register( Incident )
+admin.site.register( ChatLog )

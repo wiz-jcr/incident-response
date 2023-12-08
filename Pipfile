@@ -9,6 +9,8 @@ openai = "*"
 streamlit = "*"
 llama_index = "*"
 python-dotenv = "*"
+django = "*"
+djangorestframework = "*"
 
 dash = "*"
 pandas = "*"

@@ -101,7 +101,7 @@ a.btn-floating{
     border-radius: 5px;
 }
 
-#send-button {
+#input-container button.send-button {
     width: 25%;
     padding: 8px;
     background-color: #7C5CFC;

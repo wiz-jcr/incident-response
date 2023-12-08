@@ -12,9 +12,13 @@ class Setting(models.Model):
     icon = models.CharField(max_length=100)
 
 class Incident(models.Model):
-    id = models.AutoField(primary_key=True)
+    id = models.IntegerField(primary_key=True)
     type = models.CharField(max_length=100)
     stage = models.PositiveSmallIntegerField()
-    time_stamp = models.DateTimeField()
-    stage_name = ""
-    finished = []
+    time_stamp = models.DateTimeField(auto_now=True)
+    
+class ChatLog(models.Model):
+    uid = models.IntegerField()
+    time_stamp = models.DateTimeField(auto_now=True)
+    role = models.CharField(max_length=10)
+    content = models.CharField(max_length=5000)

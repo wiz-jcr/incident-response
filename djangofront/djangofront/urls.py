@@ -17,8 +17,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from frontend.views import index
+from frontend.backend import get_incident, get_incident_detail, get_new_incident, chat_input, update_incident, create_incident, retrieve_chat
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('', index, name='index'),
+    path('api/incident/', get_incident, name='all-incidents'),
+    path('api/incident/<int:id>/', get_incident_detail, name='single-incident'),
+    path('api/create_incident/', create_incident, name='create-incident'),
+    path('api/update_incident/', update_incident, name='update-incident'),
+    path('api/new_chat/', get_new_incident, name='new-incident-id'),
+    path('api/get_chat/<int:id>/', retrieve_chat, name='retrieve-chat'),
+    path('api/chat_msg/', chat_input, name='chat-user')
 ]

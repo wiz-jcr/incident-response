@@ -8,13 +8,11 @@
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="{% static 'frontend/materialize.min.css' %}"  media="screen,projection"/>
-    <link rel="stylesheet" href="{% static 'frontend/style.css' %}">
+    <link type="text/css" rel="stylesheet" href="{% static 'frontend/style.css' %}" media="screen,projection">
     <script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/plotly.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/chart.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/misc.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/msg.js' %}"></script>
 </head>
 <body>
     
@@ -23,14 +21,14 @@
         <div class="collection">
             <a class="btn-flat disabled">Main Menu</a>
             {% for item in menulist %}
-            <a href="#!" class="btn menu-item" onclick="showContent('{{ item.tag_id }}')"><i class="material-icons left">{{ item.icon }}</i>{{ item.name }}</a>
+            <a href="#!" class="btn menu-item" id="menu-{{ item.tag_id }}" onclick="showContent('{{ item.tag_id }}')"><i class="material-icons left">{{ item.icon }}</i>{{ item.name }}</a>
             {% endfor %}
             <a class="btn-flat disabled">Preferences</a>
             {% for item in settinglist %}
-            <a href="#!" class="btn menu-item" onclick="showContent('{{ item.tag_id }}')"><i class="material-icons left">{{ item.icon }}</i>{{ item.name }}</a>
+            <a href="#!" class="btn menu-item" id="menu-{{ item.tag_id }}" onclick="showContent('{{ item.tag_id }}')"><i class="material-icons left">{{ item.icon }}</i>{{ item.name }}</a>
             {% endfor %}
         </div>
-        <a class="btn-floating btn-large" onclick="showContent('chat')"><i class="material-icons">chat_bubble_outline</i></a>
+        <a class="btn-floating btn-large" id="menu-chat" onclick="showContent('chat')"><i class="material-icons">chat_bubble_outline</i></a>
     </div>
     <div class="main" id="dash">
         <h1>
@@ -46,7 +44,7 @@
             <div id="chat-messages"></div>
             <div id="input-container">
                 <input type="text" id="user-input" placeholder="Type your message...">
-                <button id="send-button" onclick="sendMessage()">Send</button>
+                <button class="send-button" style="width: 25%;padding: 8px;background-color: #7C5CFC;color: #fff;border: none;border-radius: 5px;cursor: pointer;">Send</button>
             </div>
         </div>
     </div>
@@ -54,33 +52,7 @@
         <h1>
             Incidents
         </h1>
-        <ul class="collapsible">
-            {% for item in incidentlist %}
-            <li>
-                <div class="collapsible-header" id="incident-{{ item.id }}">
-                    <i class="material-icons">error_outline</i>
-                    {{ item.type }}
-                    <span class="badge">{{ item.time_stamp }}</span>
-                </div>
-                <div class="collapsible-body">
-                    <div style="display:flex">
-                        <div class="left-body">
-                            <ul class="collapsible">
-                                {% for tag in item.finished %}
-                                <li class="collapsible-header green" style="color:white"><i class="material-icons">done</i>{{ tag }}</li>
-                                {% endfor %}
-                                <li class="collapsible-header"><i class="material-icons">error_outline</i>{{ item.stage_name }}</li>
-                            </ul>
-                        </div>
-                        <div class="right-body card horizontal">
-                            <div class="card-content">
-                            <p>Lorem ipsum</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            {% endfor %}
+        <ul class="collapsible" id="threat-list">
         </ul>
     </div>
     <div class="main" id="setting">
@@ -93,6 +65,7 @@
             Work In Progress
         </h1>
     </div>
+    <script type="text/javascript" src="{% static 'js/misc.js' %}"></script>
     <script>
         showContent('dash');
 
@@ -102,11 +75,6 @@
             // Set up an interval to call the function every 5 seconds
             setInterval(drawChart, 1000);
         }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            var elems = document.querySelectorAll('.collapsible');
-            var instances = M.Collapsible.init(elems, {accordion: false});
-         });
 
     </script>
 </body>
